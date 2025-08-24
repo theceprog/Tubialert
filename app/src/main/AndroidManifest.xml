@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tubialert">
         <activity
+            android:name=".SignUp"
+            android:exported="false" />
+        <activity
+            android:name=".ForgotNew"
+            android:exported="false" />
+        <activity
+            android:name=".VerifyOtp"
+            android:exported="false" />
+        <activity
+            android:name=".ForgotActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

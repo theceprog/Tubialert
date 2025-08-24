@@ -60,12 +60,48 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppinsregular"
-            android:text="Login to your account."
+            android:text="Create an Account."
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tubisubtitle" />
+
+        <TextView
+            android:id="@+id/nametitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppinsbold"
+            android:labelFor="@id/emailedit"
+            android:text="FULL NAME"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logintitle" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/namecard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/loginedittextbg"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nametitle">
+
+            <EditText
+                android:id="@+id/nameedit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:fontFamily="@font/poppinsregular"
+                android:foregroundTint="#00000000"
+                android:hint="ex. Juan Dela Cruz"
+                android:padding="20dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/emailtitle"
@@ -74,11 +110,11 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppinsbold"
             android:labelFor="@id/emailedit"
-            android:text="EMAIL"
+            android:text="EMAIL ADDRESS"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logintitle" />
+            app:layout_constraintTop_toBottomOf="@+id/namecard" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/emailcard"
@@ -104,6 +140,78 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
+            android:id="@+id/phonetitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppinsbold"
+            android:labelFor="@id/emailedit"
+            android:text="MOBILE PHONE"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailcard" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/phonecard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/loginedittextbg"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phonetitle">
+
+            <EditText
+                android:id="@+id/phoneedit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:fontFamily="@font/poppinsregular"
+                android:foregroundTint="#00000000"
+                android:hint="ex. 09123456789"
+                android:padding="20dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/gendertitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppinsbold"
+            android:labelFor="@id/emailedit"
+            android:text="GENDER"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phonecard" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/gendercard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/loginedittextbg"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gendertitle">
+
+            <EditText
+                android:id="@+id/genderedit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:fontFamily="@font/poppinsregular"
+                android:foregroundTint="#00000000"
+                android:hint="Select a Gender"
+                android:padding="20dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
             android:id="@+id/passwordtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -114,7 +222,7 @@
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailcard" />
+            app:layout_constraintTop_toBottomOf="@+id/gendercard" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/passwordcard"
@@ -133,30 +241,53 @@
                 android:background="#00000000"
                 android:fontFamily="@font/poppinsregular"
                 android:foregroundTint="#00000000"
-                android:hint="Enter your Password"
+                android:hint="Create a Password"
                 android:padding="20dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white" />
         </androidx.cardview.widget.CardView>
 
+
         <TextView
-            android:id="@+id/forgot"
+            android:id="@+id/passwordretypetitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:background="@drawable/underline"
-            android:fontFamily="@font/poppinsregular"
-            android:paddingBottom="16dp"
-            android:text="Forgot your password?"
-            android:textAlignment="center"
-            android:textColor="#679dcb"
-            android:textSize="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppinsitalic"
+            android:labelFor="@id/passwordedit"
+            android:text="Note: Must be 8 characters, include uppercase, lowercase, number &amp; symbol (! @ # $ % ^ &amp; *)."
+            android:textColor="@color/white"
+            android:textSize="10sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passwordcard" />
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/passwordretypecard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/loginedittextbg"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordretypetitle">
+
+            <EditText
+                android:id="@+id/passwordretypeedit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:fontFamily="@font/poppinsregular"
+                android:foregroundTint="#00000000"
+                android:hint="Re-type your password"
+                android:padding="20dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+        </androidx.cardview.widget.CardView>
+
         <Button
-            android:id="@+id/loginbutton"
+            android:id="@+id/signupbutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
@@ -166,7 +297,7 @@
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/forgot" />
+            app:layout_constraintTop_toBottomOf="@+id/passwordretypecard" />
 
         <LinearLayout
             android:id="@+id/donthaveacc"
@@ -176,26 +307,24 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loginbutton">
+            app:layout_constraintTop_toBottomOf="@+id/signupbutton">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsregular"
-                android:text="Don't have an account?"
+                android:text="Already have an account?"
                 android:textAlignment="center"
                 android:textColor="#fff"
                 android:textSize="12dp" />
 
             <TextView
-                android:id="@+id/signuptext"
+                android:id="@+id/logintext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:background="@drawable/underline"
                 android:fontFamily="@font/poppinsregular"
-                android:paddingBottom="16dp"
-                android:text="Sign Up"
+                android:text="Login"
                 android:textAlignment="center"
                 android:textColor="#679dcb"
                 android:textSize="12dp" />

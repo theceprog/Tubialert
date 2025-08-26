@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "317885700619",
+    "project_id": "tubialert-dc2fd",
+    "storage_bucket": "tubialert-dc2fd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:317885700619:android:371d03e0dee093be5d850e",
+        "android_client_info": {
+          "package_name": "com.proj.tubialert"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwIc14y20T7BP5CzbT6g6o2U2ZcjTH_9U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

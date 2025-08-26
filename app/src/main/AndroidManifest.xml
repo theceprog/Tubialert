@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tubialert">
         <activity
+            android:name=".Dashboard"
+            android:exported="false"
+            android:label="@string/title_activity_dashboard"
+            android:theme="@style/Theme.Tubialert.NoActionBar" />
+        <activity
             android:name=".SignUp"
             android:exported="false" />
         <activity

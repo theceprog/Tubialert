@@ -29,5 +29,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SignUp::class.java)
             startActivity(intent)
         }
+        val loginBtn: TextView = findViewById(R.id.loginbutton)
+        loginBtn.setOnClickListener {
+            val intent = Intent(this, Dashboard::class.java)
+            startActivity(intent)
+        }
     }
 }

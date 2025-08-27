@@ -12,14 +12,31 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.proj.tubialert.ui.gallery.GalleryFragment"
+        android:id="@+id/navnotif"
+        android:name="com.proj.tubialert.NotificationFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_notification" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.proj.tubialert.ui.slideshow.SlideshowFragment"
+        android:id="@+id/navprofile"
+        android:name="com.proj.tubialert.ProfileFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/navhelp"
+        android:name="com.proj.tubialert.HelpFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_help" />
+    <fragment
+        android:id="@+id/navterms"
+        android:name="com.proj.tubialert.TermsFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_terms" />
+    <fragment
+        android:id="@+id/navabout"
+        android:name="com.proj.tubialert.AboutFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_about" />
+
+
 </navigation>

@@ -4,17 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.text.color
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.proj.tubialert.R
 import com.proj.tubialert.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     private lateinit var homeViewModel: HomeViewModel
@@ -38,16 +39,18 @@ class HomeFragment : Fragment() {
         homeViewModel.waterText.observe(viewLifecycleOwner, Observer { newWaterText ->
             binding.textViewWater.text = newWaterText
         })
+        homeViewModel.statusText.observe(viewLifecycleOwner, Observer { newStatusText ->
+            binding.safetext.text = newStatusText // Set the text first
 
-
-        /*
-        // If using the SensorReadingsDisplay LiveData from the ViewModel
-        homeViewModel.sensorReadingsDisplay.observe(viewLifecycleOwner) { readings ->
-            binding.textViewRain.text = readings.rain
-            binding.textViewTemp.text = readings.temp
-            binding.textViewWater.text = readings.water
-        }
-        */
+            val colorResId = when (newStatusText?.trim()?.lowercase()) { // Use lowercase and trim for robust comparison
+                "safe" -> R.color.status_safe_green
+                "monitoring" -> R.color.status_monitoring_yellow
+                "alert" -> R.color.status_alert_orange
+                "evacuate" -> R.color.status_evacuate_red
+                else -> R.color.status_default_color // Default color if no match
+            }
+            binding.safetext.setTextColor(ContextCompat.getColor(requireContext(), colorResId))
+        })
 
         return root
     }
@@ -58,10 +61,6 @@ class HomeFragment : Fragment() {
         homeViewModel.startListeningForSensorUpdates()
         // Or homeViewModel.startListeningForSensorUpdatesAsObject()
     }
-
-// No need to explicitly stop listening here if using ViewModel's onCleared()
-// The ViewModel's onCleared will handle detaching the listener when the ViewModel
-// is no longer needed (e.g., when the Fragment is permanently destroyed).
 
     override fun onDestroyView() {
         super.onDestroyView()

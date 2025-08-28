@@ -25,6 +25,9 @@ class HomeViewModel : ViewModel() {
     private val _waterText = MutableLiveData<String>()
     val waterText: LiveData<String> = _waterText
 
+    private val _statusText = MutableLiveData<String>()
+    val statusText: LiveData<String> = _statusText
+
     // LiveData for a generic status or error message
     private val _statusMessage = MutableLiveData<String>()
     val statusMessage: LiveData<String> = _statusMessage
@@ -37,61 +40,30 @@ class HomeViewModel : ViewModel() {
         }
         Log.d("HomeViewModel", "Starting to listen for sensor updates.")
         sensorListenerRegistration = firestoreService.listenForSensorUpdates(
-            onUpdate = { rain, temp, water ->
-                Log.i("HomeViewModel", "Sensor Update Received: Rain: $rain, Temp: $temp, Water: $water")
+            onUpdate = { rain, temp, water, status ->
+                Log.i(
+                    "HomeViewModel",
+                    "Sensor Update Received: Rain: $rain, Temp: $temp, Water: $water, Status: $status"
+                )
 
                 _rainText.value = rain?.let { "%.1f mm/hr".format(it) } ?: "N/A"
                 _tempText.value = temp?.let { "%.1f °C".format(it) } ?: "N/A"
-                _waterText.value = water?.let { "%.0f %%".format(it) } ?: "N/A" // %% to escape % in format string
-
+                _waterText.value =
+                    water?.let { "%.0f %%".format(it) } ?: "N/A" // %% to escape % in format string
+                _statusText.value = status ?: "N/A"
                 //_statusMessage.value = "Data updated" // Optional
             },
             onError = { exception ->
-                Log.e("HomeViewModel", "Error listening to sensor updates: ${exception.message}", exception)
+                Log.e(
+                    "HomeViewModel",
+                    "Error listening to sensor updates: ${exception.message}",
+                    exception
+                )
                 _statusMessage.value = "Error: ${exception.message}"
                 _rainText.value = "Error"
                 _tempText.value = "Error"
                 _waterText.value = "Error"
-            }
-        )
-    }
-
-    // --- Option 2: Using the custom object approach (Modified for formatting) ---
-    // Define the display-specific data class if you use this option
-    data class SensorReadingsDisplay(
-        val rain: String,
-        val temp: String,
-        val water: String
-    )
-    private val _sensorReadingsDisplay = MutableLiveData<SensorReadingsDisplay>()
-    val sensorReadingsDisplay: LiveData<SensorReadingsDisplay> = _sensorReadingsDisplay
-
-    fun startListeningForSensorUpdatesAsObject() {
-        if (sensorListenerRegistration != null) {
-            Log.d("HomeViewModel", "Listener (object) already active.")
-            return
-        }
-        Log.d("HomeViewModel", "Starting to listen for sensor updates (as object).")
-        sensorListenerRegistration = firestoreService.listenForSensorUpdatesAsCustomObject( // Assuming this method exists and works
-            onUpdate = { readings ->
-                if (readings != null) {
-                    Log.i("HomeViewModel", "Sensor Object Update: Rain: ${readings.rain}, Temp: ${readings.temp}, Water: ${readings.water}")
-                    _sensorReadingsDisplay.value = SensorReadingsDisplay(
-                        rain = readings.rain?.let { "%.1f mm/hr".format(it) } ?: "N/A",
-                        temp = readings.temp?.let { "%.1f °C".format(it) } ?: "N/A",
-                        water = readings.water?.let { "%.0f %%".format(it) } ?: "N/A"
-                    )
-                    // _statusMessage.value = "Data updated"
-                } else {
-                    Log.w("HomeViewModel", "Sensor data became null (document likely deleted)")
-                    _sensorReadingsDisplay.value = SensorReadingsDisplay("N/A", "N/A", "N/A")
-                    _statusMessage.value = "Sensor data unavailable."
-                }
-            },
-            onError = { exception ->
-                Log.e("HomeViewModel", "Error listening to sensor updates: ${exception.message}", exception)
-                _statusMessage.value = "Error: ${exception.message}"
-                _sensorReadingsDisplay.value = SensorReadingsDisplay("Error", "Error", "Error")
+                _statusText.value = "Error"
             }
         )
     }
@@ -107,16 +79,18 @@ class HomeViewModel : ViewModel() {
     fun fetchSensorDataOnce() {
         Log.d("HomeViewModel", "Fetching sensor data once.")
         firestoreService.getSensorData( // Ensure this method exists and works in FirestoreService
-            onSuccess = { rain, temp, water ->
+            onSuccess = { rain, temp, water, status ->
                 _rainText.value = rain?.let { "%.1f mm/hr".format(it) } ?: "N/A"
                 _tempText.value = temp?.let { "%.1f °C".format(it) } ?: "N/A"
                 _waterText.value = water?.let { "%.0f %%".format(it) } ?: "N/A"
+                _statusText.value = status ?: "N/A"
             },
             onFailure = { exception ->
                 _statusMessage.value = "Error fetching once: ${exception.message}"
                 _rainText.value = "Error"
                 _tempText.value = "Error"
                 _waterText.value = "Error"
+                _statusText.value = "Error"
             }
         )
     }

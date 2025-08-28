@@ -1,4 +1,5 @@
 package com.proj.tubialert
+
 import android.util.Log
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.DocumentSnapshot
@@ -12,7 +13,7 @@ class FirestoreService {
 
     // Your existing getSensorData method (fetches once)
     fun getSensorData(
-        onSuccess: (rain: Double?, temp: Double?, water: Double?) -> Unit,
+        onSuccess: (rain: Double?, temp: Double?, water: Double?, status: String?) -> Unit,
         onFailure: (Exception) -> Unit
     ) {
         val docRef = db.collection("sensor").document("1")
@@ -23,7 +24,8 @@ class FirestoreService {
                     val rain = document.getDouble("rain")
                     val temp = document.getDouble("temp")
                     val water = document.getDouble("water")
-                    onSuccess(rain, temp, water)
+                    val status = document.getString("status")
+                    onSuccess(rain, temp, water, status)
                 } else {
                     Log.d("FirestoreService", "No such document (get)")
                     onFailure(Exception("No such document"))
@@ -37,7 +39,7 @@ class FirestoreService {
 
     // New method to listen for realtime updates
     fun listenForSensorUpdates(
-        onUpdate: (rain: Double?, temp: Double?, water: Double?) -> Unit,
+        onUpdate: (rain: Double?, temp: Double?, water: Double?, status: String?) -> Unit,
         onError: (FirebaseFirestoreException) -> Unit
     ): ListenerRegistration { // Return ListenerRegistration to allow detaching
         val docRef = db.collection("sensor").document("1")
@@ -55,11 +57,13 @@ class FirestoreService {
                 val rain = snapshot.getDouble("rain")
                 val temp = snapshot.getDouble("temp")
                 val water = snapshot.getDouble("water")
-                onUpdate(rain, temp, water)
+                val status = snapshot.getString("status")
+
+                onUpdate(rain, temp, water, status)
             } else {
                 Log.d("FirestoreService", "Current data: null (listen or document deleted)")
                 // You might want to signal that the document was deleted or doesn't exist
-                onUpdate(null, null, null) // Or handle this case specifically
+                onUpdate(null, null, null, null) // Or handle this case specifically
             }
         }
     }

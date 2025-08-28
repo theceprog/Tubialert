@@ -4,4 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="loginbg">#323c4b</color>
     <color name="loginedittextbg">#b3b7bd</color>
+    <color name="status_safe_green">#4CAF50</color>
+    <color name="status_monitoring_yellow">#FFEB3B</color>
+    <color name="status_alert_orange">#FF9800</color>
+    <color name="status_evacuate_red">#F44336</color>
+    <color name="status_default_color">#000000</color>
 </resources>

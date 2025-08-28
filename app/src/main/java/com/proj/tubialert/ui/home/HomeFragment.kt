@@ -1,6 +1,7 @@
 package com.proj.tubialert.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,26 +41,49 @@ class HomeFragment : Fragment() {
             binding.textViewWater.text = newWaterText
         })
         homeViewModel.statusText.observe(viewLifecycleOwner, Observer { newStatusText ->
-            binding.safetext.text = newStatusText // Set the text first
+            binding.safetext.text = newStatusText
 
-            val colorResId = when (newStatusText?.trim()?.lowercase()) { // Use lowercase and trim for robust comparison
+            val colorResId = when (newStatusText?.trim()?.lowercase()) {
                 "safe" -> R.color.status_safe_green
                 "monitoring" -> R.color.status_monitoring_yellow
                 "alert" -> R.color.status_alert_orange
                 "evacuate" -> R.color.status_evacuate_red
-                else -> R.color.status_default_color // Default color if no match
+                else -> R.color.status_default_color
             }
             binding.safetext.setTextColor(ContextCompat.getColor(requireContext(), colorResId))
         })
+        homeViewModel.lastUpdateText.observe(viewLifecycleOwner, Observer { text ->
+            binding.lastupdate.text = text
+        })
 
+        homeViewModel.weatherDescriptionText.observe(viewLifecycleOwner, Observer { text ->
+            binding.weather.text = text
+        })
+
+        homeViewModel.rainChanceText.observe(viewLifecycleOwner, Observer { text ->
+            binding.rainchance.text = text
+        })
+
+        homeViewModel.accuWeatherStatus.observe(viewLifecycleOwner, Observer { status ->
+            Log.i("HomeFragment", "AccuWeather Status: $status")
+        })
+
+        homeViewModel.weatherImageResId.observe(viewLifecycleOwner, Observer { imageResId ->
+            Log.d("HomeFragment", "weatherImageResId Observer triggered with imageResId: $imageResId")
+            if (imageResId != 0 && imageResId != null) { // Basic check for valid resource ID
+                binding.weatherimage.setImageResource(imageResId)
+            } else {
+                Log.w("HomeFragment", "Received invalid imageResId: $imageResId, not setting image.")
+
+            }
+        })
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Start listening when the view is created and visible
         homeViewModel.startListeningForSensorUpdates()
-        // Or homeViewModel.startListeningForSensorUpdatesAsObject()
+        homeViewModel.fetchAccuWeatherData()
     }
 
     override fun onDestroyView() {

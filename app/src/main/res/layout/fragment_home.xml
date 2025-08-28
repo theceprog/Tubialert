@@ -64,11 +64,12 @@
 
 
                 <ImageView
+                    android:id="@+id/weatherimage"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_marginVertical="10dp"
                     android:layout_weight="1"
-                    android:src="@drawable/sanm" />
+                    android:src="@drawable/ic_weather_sunny" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -78,6 +79,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/lastupdate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
@@ -87,6 +89,7 @@
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/weather"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
@@ -96,6 +99,7 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/rainchance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"

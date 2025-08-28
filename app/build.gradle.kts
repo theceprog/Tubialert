@@ -53,8 +53,18 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.ui.text)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("com.google.android.material:material:1.6.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0") // Or the latest version
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0") // For JSON parsing (or Moshi, Jackson)
+
+    // OkHttp (usually included with Retrofit, but good to be aware of)
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3") // Optional, for logging API requests/responses
+
+    // Kotlin Coroutines (if not already added)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3") // Or the latest version
+
 }

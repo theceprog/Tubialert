@@ -135,10 +135,11 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:id="@+id/textViewWater"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsbold"
-                            android:text="20%"
+                            android:text="20 m"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="30sp" />
@@ -185,10 +186,11 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:id="@+id/textViewTemp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsbold"
-                            android:text="20%"
+                            android:text="20 °C"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="30sp" />
@@ -245,10 +247,11 @@
                             android:layout_gravity="center">
 
                             <TextView
+                                android:id="@+id/textViewRain"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppinsbold"
-                                android:text="20%"
+                                android:text="0 mm"
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
                                 android:textSize="30sp"

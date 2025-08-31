@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
+        android:background="#2d6279"
         android:gravity="center_vertical">
 
         <TextView
@@ -22,7 +23,8 @@
             android:layout_weight="1"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/black" />
+            android:fontFamily="@font/poppinsbold"
+            android:textColor="@color/white" />
 
         <ImageView
             android:id="@+id/expandCollapseIcon"

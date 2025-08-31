@@ -46,23 +46,28 @@ class HelpFragment : Fragment() {
             ),
             FAQItem(
                 "What do the Alert Colors Mean?",
-                "Alert colors indicate different severity levels of flooding. Red indicates the most severe conditions, while yellow indicates caution."
+                "\uD83D\uDFE2 Safe  – Normal condition.\n" +
+                        "\uD83D\uDFE1 Monitoring Level – Rising water, stay alert.\n" +
+                        "\uD83D\uDFE0 Alert Level – Possible flooding, prepare to evacuate.\n" +
+                        "\uD83D\uDD34 Evacuate Level – Dangerous level, evacuate immediately."
             ),
             FAQItem(
                 "How will I receive alerts?",
-                "You will receive alerts via push notifications, SMS messages, and email based on your preferences."
+                "Residents who have registered will receive SMS alerts and in-app notifications during flood events."
             ),
             FAQItem(
                 "How do I update my contact information?",
-                "Go to Settings > Profile > Contact Information to update your phone number and email address."
+                "Go to Profile Settings in the menu to update your phone number, email, or password. [Note: Your Full Name and Gender cannot be edited after registration for security and verification purposes."
             ),
             FAQItem(
                 "What if I don't receive SMS alerts?",
-                "Check your phone's signal, ensure notifications are enabled, and verify your contact number in the app settings."
+                "Go to your Profile Settings and double-check if your registered mobile number is correct.\n" +
+                        "If you’re using a phone with two SIM cards, try switching to your other SIM number in the profile.\n" +
+                        "Also check the Notification Settings inside your profile and make sure SMS Alerts are turned ON."
             ),
             FAQItem(
                 "Where can I find emergency hotlines?",
-                "Emergency hotlines are listed in the Emergency section of the app, accessible from the main menu."
+                "Tap the Emergency Hotlines icon below (navigation bar) to see important contact numbers of Brgy. Gaya-Gaya. Including Ambulance, New Hotline - Main, and New Hotline - Annex."
             )
         )
 

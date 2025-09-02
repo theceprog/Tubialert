@@ -116,6 +116,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/waterlevelcontainer"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -124,6 +125,7 @@
                     app:cardCornerRadius="15dp">
 
                     <LinearLayout
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -133,7 +135,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsbold"
-                            android:text="Water Level"
+                            android:maxLines="2"
+                            android:minLines="2"
+                            android:text="Flood Level of Happy Valley"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
@@ -143,7 +147,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsbold"
-                            android:text="20 m"
+                            android:text="20 %"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="30sp" />
@@ -184,7 +188,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppinsbold"
-                            android:text="Temperature Display"
+                            android:maxLines="2"
+                            android:minLines="2"
+                            android:text="Weather Temperature Display"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="12sp" />

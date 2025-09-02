@@ -1,5 +1,6 @@
 package com.proj.tubialert.ui.home
 
+import android.graphics.Color
 import android.util.Log
 import androidx.activity.result.launch
 import androidx.annotation.DrawableRes
@@ -64,7 +65,8 @@ class HomeViewModel : ViewModel() {
     private val accuWeatherService = RetrofitClient.instance
     private val apiKey = "BphYMJ4IIbBH9XXfPnBUGTcn0EZIfoOb"
     private val locationKey = "3406785"
-
+    private val _waterValue = MutableLiveData<Double?>()
+    val waterValue: LiveData<Double?> = _waterValue
 
     fun fetchAccuWeatherData() {
         _accuWeatherStatus.value = "Loading weather..."
@@ -147,7 +149,6 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-
     fun startListeningForSensorUpdates() {
         if (sensorListenerRegistration != null) return
         sensorListenerRegistration = firestoreService.listenForSensorUpdates(
@@ -156,6 +157,7 @@ class HomeViewModel : ViewModel() {
                 _tempText.value = temp?.let { "%.1f °C".format(it) } ?: "N/A"
                 _waterText.value = water?.let { "%.0f %%".format(it) } ?: "N/A"
                 _statusText.value = status ?: "N/A"
+                _waterValue.value = water
             },
             onError = { exception ->
                 _statusMessage.value = "Error: ${exception.message}"
@@ -172,6 +174,7 @@ class HomeViewModel : ViewModel() {
                 _tempText.value = temp?.let { "%.1f °C".format(it) } ?: "N/A"
                 _waterText.value = water?.let { "%.0f %%".format(it) } ?: "N/A"
                 _statusText.value = status ?: "N/A"
+                _waterValue.value = water
             },
             onFailure = { exception ->
                 _statusMessage.value = "Error: ${exception.message}"

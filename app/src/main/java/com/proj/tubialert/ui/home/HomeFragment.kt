@@ -13,21 +13,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.proj.tubialert.R
 import com.proj.tubialert.databinding.FragmentHomeBinding
+import androidx.core.graphics.toColorInt
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
     private val binding get() = _binding!!
-    fun getWaterLevelColor(waterLevel: Double?): Int {
-        return when {
-            waterLevel == null -> Color.parseColor("#CCCCCC") // Default gray for null/error
-            waterLevel <= 40 -> Color.parseColor("#22992F")   // Green for up to 40%
-            waterLevel <= 60 -> Color.parseColor("#CC9A09")   // Yellow for 40-60%
-            waterLevel <= 80 -> Color.parseColor("#B66716")   // Orange for 60-80%
-            else -> Color.parseColor("#A02A14")               // Red for 80-100%
-        }
-    }
 
     private lateinit var homeViewModel: HomeViewModel
 
@@ -77,15 +69,15 @@ class HomeFragment : Fragment() {
         homeViewModel.accuWeatherStatus.observe(viewLifecycleOwner, Observer { status ->
             Log.i("HomeFragment", "AccuWeather Status: $status")
         })
-// In your Fragment
+
         homeViewModel.waterText.observe(viewLifecycleOwner, Observer { newWaterText ->
             binding.textViewWater.text = newWaterText
         })
 
-        homeViewModel.waterValue.observe(viewLifecycleOwner, Observer { waterValue ->
-            val color = getWaterLevelColor(waterValue)
+        homeViewModel.waterCardColor.observe(viewLifecycleOwner, Observer { color ->
             binding.waterlevelcontainer.setCardBackgroundColor(color)
         })
+
         homeViewModel.weatherImageResId.observe(viewLifecycleOwner, Observer { imageResId ->
             Log.d("HomeFragment", "weatherImageResId Observer triggered with imageResId: $imageResId")
             if (imageResId != 0 && imageResId != null) { // Basic check for valid resource ID

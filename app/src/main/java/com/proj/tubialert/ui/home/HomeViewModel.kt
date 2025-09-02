@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.util.Log
 import androidx.activity.result.launch
 import androidx.annotation.DrawableRes
+import androidx.core.graphics.toColorInt
 import java.util.Locale
 import androidx.core.util.remove
 import androidx.lifecycle.LiveData
@@ -148,7 +149,19 @@ class HomeViewModel : ViewModel() {
             else -> R.drawable.sanm
         }
     }
+    private val _waterCardColor = MutableLiveData<Int>(Color.parseColor("#CCCCCC"))
+    val waterCardColor: LiveData<Int> = _waterCardColor
 
+    private fun updateWaterCardColor(waterLevel: Double?) {
+        val color = when {
+            waterLevel == null -> Color.parseColor("#CCCCCC")
+            waterLevel <= 40 -> Color.parseColor("#22992F")
+            waterLevel <= 60 -> Color.parseColor("#CC9A09")
+            waterLevel <= 80 -> Color.parseColor("#B66716")
+            else -> Color.parseColor("#A02A14")
+        }
+        _waterCardColor.value = color
+    }
     fun startListeningForSensorUpdates() {
         if (sensorListenerRegistration != null) return
         sensorListenerRegistration = firestoreService.listenForSensorUpdates(
@@ -157,7 +170,7 @@ class HomeViewModel : ViewModel() {
                 _tempText.value = temp?.let { "%.1f °C".format(it) } ?: "N/A"
                 _waterText.value = water?.let { "%.0f %%".format(it) } ?: "N/A"
                 _statusText.value = status ?: "N/A"
-                _waterValue.value = water
+                updateWaterCardColor(water)
             },
             onError = { exception ->
                 _statusMessage.value = "Error: ${exception.message}"
@@ -174,7 +187,7 @@ class HomeViewModel : ViewModel() {
                 _tempText.value = temp?.let { "%.1f °C".format(it) } ?: "N/A"
                 _waterText.value = water?.let { "%.0f %%".format(it) } ?: "N/A"
                 _statusText.value = status ?: "N/A"
-                _waterValue.value = water
+                updateWaterCardColor(water)
             },
             onFailure = { exception ->
                 _statusMessage.value = "Error: ${exception.message}"
@@ -183,7 +196,6 @@ class HomeViewModel : ViewModel() {
             }
         )
     }
-
     override fun onCleared() {
         super.onCleared()
         sensorListenerRegistration?.remove()

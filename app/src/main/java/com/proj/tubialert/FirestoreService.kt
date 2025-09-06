@@ -2,6 +2,7 @@ package com.proj.tubialert
 
 import android.util.Log
 import com.google.firebase.Firebase
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.ListenerRegistration
@@ -92,5 +93,98 @@ class FirestoreService {
                 onUpdate(null) // Document deleted or does not exist
             }
         }
+    }  fun loginUser(
+        email: String,
+        password: String,
+        onSuccess: (User) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        // Input validation
+        if (email.isBlank() || password.isBlank()) {
+            onFailure(Exception("Email and password cannot be empty"))
+            return
+        }
+
+        val docRef = db.collection("users").document(email)
+
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val user = document.toObject(User::class.java)
+
+                    if (user != null) {
+                        // Verify password (you should use proper password hashing)
+                        if (user.password == password) { // In production, use proper password verification
+                            onSuccess(user)
+                        } else {
+                            onFailure(Exception("Invalid password"))
+                        }
+                    } else {
+                        onFailure(Exception("User data corrupted"))
+                    }
+                } else {
+                    onFailure(Exception("User not found"))
+                }
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+    }
+
+    fun signUpUser(
+        user: User,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        // Input validation
+        if (user.email.isBlank() || user.password.isBlank() || user.name.isBlank()) {
+            onFailure(Exception("All fields are required"))
+            return
+        }
+
+        // Check if user already exists
+        db.collection("users")
+            .document(user.email)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    onFailure(Exception("User with this email already exists"))
+                } else {
+                    // Create new user
+                    val userData = hashMapOf(
+                        "email" to user.email,
+                        "password" to user.password, // Hash this in production
+                        "name" to user.name,
+                        "phone" to user.phone,
+                        "gender" to user.gender,
+                        "createdAt" to Timestamp.now()
+                    )
+
+                    db.collection("users")
+                        .document(user.email)
+                        .set(userData)
+                        .addOnSuccessListener {
+                            onSuccess()
+                        }
+                        .addOnFailureListener { exception ->
+                            onFailure(exception)
+                        }
+                }
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+    }
+
+    // Password validation helper
+    fun isValidPassword(password: String): Boolean {
+        val pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{8,}\$".toRegex()
+        return pattern.matches(password)
+    }
+
+    // Email validation helper
+    fun isValidEmail(email: String): Boolean {
+        val pattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
+        return pattern.matches(email)
     }
 }

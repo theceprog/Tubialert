@@ -91,7 +91,7 @@
             app:layout_constraintTop_toBottomOf="@+id/emailtitle">
 
             <EditText
-                android:id="@+id/emailedit"
+                android:id="@+id/emailEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00000000"
@@ -127,7 +127,7 @@
             app:layout_constraintTop_toBottomOf="@+id/passwordtitle">
 
             <EditText
-                android:id="@+id/passwordedit"
+                android:id="@+id/passwordEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#00000000"
@@ -156,7 +156,7 @@
             app:layout_constraintTop_toBottomOf="@+id/passwordcard" />
 
         <Button
-            android:id="@+id/loginbutton"
+            android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"

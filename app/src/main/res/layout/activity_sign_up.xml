@@ -293,7 +293,7 @@
             android:backgroundTint="@color/white"
             android:fontFamily="@font/poppinsbold"
             android:padding="20dp"
-            android:text="Login"
+            android:text="Sign Up"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
